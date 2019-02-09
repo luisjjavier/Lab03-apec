@@ -1,0 +1,2139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProdoctivityCaptureDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActiveInstanceServices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="ProcessName" Type="varchar" MaxLength="400" />
+          <Property Name="Path" Type="varchar" MaxLength="400" />
+          <Property Name="ServiceType" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BatchAssignments">
+          <Key>
+            <PropertyRef Name="BatchId" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="BatchId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Batches">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="WorkflowId" Type="int" Nullable="false" />
+          <Property Name="BatchStatus" Type="int" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="400" />
+          <Property Name="BatchPages" Type="int" Nullable="false" />
+          <Property Name="IsAssignedAsDocument" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BatchExternalProperties">
+          <Key>
+            <PropertyRef Name="ExternalPropertyId" />
+            <PropertyRef Name="BatchId" />
+          </Key>
+          <Property Name="ExternalPropertyId" Type="int" Nullable="false" />
+          <Property Name="BatchId" Type="bigint" Nullable="false" />
+          <Property Name="ExternalPropertyValue" Type="varchar" MaxLength="400" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ComposedBarcodeConfigurations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InitialPosition" Type="int" Nullable="false" />
+          <Property Name="FinalPosition" Type="int" Nullable="false" />
+          <Property Name="ElementType" Type="int" Nullable="false" />
+          <Property Name="Example" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="ExtractedData" Type="varchar" MaxLength="400" />
+          <Property Name="BarcodeFormat" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="CustomReportConfigurations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProcedureName" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="UsedParameters" Type="bit" />
+          <Property Name="CustomReportSourceTitle" Type="varchar" MaxLength="400" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentAssignments">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Name="DocumentId" Type="bigint" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="400" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentBarcodeMetadatas">
+          <Key>
+            <PropertyRef Name="MetadataId" />
+          </Key>
+          <Property Name="MetadataId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentId" Type="bigint" Nullable="false" />
+          <Property Name="SplitterElementType" Type="int" Nullable="false" />
+          <Property Name="ExtractedInfo" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="DocumentComments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentId" Type="bigint" Nullable="false" />
+          <Property Name="Comment" Type="varchar" MaxLength="500" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="User" Type="varchar" MaxLength="400" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentQrMetadatas">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Name="DocumentId" Type="bigint" Nullable="false" />
+          <Property Name="DocumentHandle" Type="bigint" Nullable="false" />
+          <Property Name="PageQuantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchId" Type="bigint" Nullable="false" />
+          <Property Name="DocumentType" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentsSplitters">
+          <Key>
+            <PropertyRef Name="WorkflowId" />
+          </Key>
+          <Property Name="WorkflowId" Type="int" Nullable="false" />
+          <Property Name="DocumentSplitterType" Type="int" Nullable="false" />
+          <Property Name="BarcodeValue" Type="varchar" MaxLength="400" />
+          <Property Name="Configuration" Type="varchar" MaxLength="8000" />
+          <Property Name="SeparatorExpectedValue" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="DocumentsUserActions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentId" Type="bigint" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="400" />
+          <Property Name="DocumentAction" Type="int" Nullable="false" />
+          <Property Name="RegisterDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExternalProperties">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ExternalPropertiesWorkflowAssigments">
+          <Key>
+            <PropertyRef Name="ExternalPropertyId" />
+            <PropertyRef Name="WorkflowId" />
+          </Key>
+          <Property Name="ExternalPropertyId" Type="int" Nullable="false" />
+          <Property Name="WorkflowId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Indices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data" Type="varchar" MaxLength="8000" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="DocumentId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InstanceConfigurations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigurationName" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoginAudits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="AttemptDate" Type="datetime" Nullable="false" />
+          <Property Name="IsLoginSuccessful" Type="bit" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="PageQrMetadatas">
+          <Key>
+            <PropertyRef Name="PageId" />
+          </Key>
+          <Property Name="PageId" Type="bigint" Nullable="false" />
+          <Property Name="PageNumber" Type="int" Nullable="false" />
+          <Property Name="DocumentHandle" Type="int" Nullable="false" />
+          <Property Name="Qrcode" Type="varchar" MaxLength="400" />
+        </EntityType>
+        <EntityType Name="Pages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BatchId" Type="bigint" Nullable="false" />
+          <Property Name="Filename" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="DocumentId" Type="bigint" />
+          <Property Name="Version" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaperSizeConfigurations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PixelTypeConfigurations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QueueManagementConfigurations">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServerUrl" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="QueueName" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Exchange" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="400" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleScannerProfilesAssignments">
+          <Key>
+            <PropertyRef Name="ScannerProfileId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ScannerProfileId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RolesSpecialPermissions">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="HasWorkflowsAdministration" Type="bit" Nullable="false" />
+          <Property Name="HasBatchesControl" Type="bit" Nullable="false" />
+          <Property Name="HasReleaseBatches" Type="bit" Nullable="false" />
+          <Property Name="HasDeleteBatches" Type="bit" Nullable="false" />
+          <Property Name="HasRenameBatches" Type="bit" Nullable="false" />
+          <Property Name="HasUnblockBatches" Type="bit" Nullable="false" />
+          <Property Name="HasDeletePages" Type="bit" Nullable="false" />
+          <Property Name="HasApproveAllDocuments" Type="bit" Nullable="false" />
+          <Property Name="HasIndexOnSupervision" Type="bit" Nullable="false" />
+          <Property Name="CanReleaseOnDigitalizationException" Type="bit" Nullable="false" />
+          <Property Name="CanWorkWithRandomAssignation" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleWorkflowAssignments">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="WorkflowId" />
+          </Key>
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="WorkflowId" Type="int" Nullable="false" />
+          <Property Name="QueuePermissions" Type="varchar" MaxLength="400" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScannerProfiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="400" />
+          <Property Name="ProfileStatus" Type="int" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="AutomaticBrightness" Type="bit" Nullable="false" />
+          <Property Name="BothSides" Type="bit" Nullable="false" />
+          <Property Name="AutomaticFeeding" Type="bit" Nullable="false" />
+          <Property Name="AutomaticScan" Type="bit" Nullable="false" />
+          <Property Name="ImageQuality" Type="int" Nullable="false" />
+          <Property Name="Resolution" Type="int" Nullable="false" />
+          <Property Name="AutoDetectedSize" Type="bit" Nullable="false" />
+          <Property Name="SkipBlankPage" Type="bit" Nullable="false" />
+          <Property Name="AutomaticAlignment" Type="bit" Nullable="false" />
+          <Property Name="ScannerUi" Type="bit" Nullable="false" />
+          <Property Name="ShowIndicator" Type="bit" Nullable="false" />
+          <Property Name="PixelTypeConfigurationId" Type="int" Nullable="false" />
+          <Property Name="PaperSizeConfigurationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserActionLogs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Message" Type="varchar" MaxLength="400" />
+          <Property Name="AuditedAction" Type="int" Nullable="false" />
+          <Property Name="AuditDate" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Volumes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="int" Nullable="false" />
+          <Property Name="Path" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="400" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WebHookClients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConfigurationName" Type="varchar" MaxLength="400" />
+          <Property Name="Methodtype" Type="int" Nullable="false" />
+          <Property Name="Timeout" Type="real" Nullable="false" />
+          <Property Name="ClientServer" Type="varchar" MaxLength="400" />
+          <Property Name="ClientResource" Type="varchar" MaxLength="400" />
+          <Property Name="SubscriptionType" Type="int" Nullable="false" />
+          <Property Name="EventType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkflowDocumentTypeAssignments">
+          <Key>
+            <PropertyRef Name="WorkflowId" />
+            <PropertyRef Name="DocumentTypeId" />
+          </Key>
+          <Property Name="WorkflowId" Type="int" Nullable="false" />
+          <Property Name="DocumentTypeId" Type="int" Nullable="false" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Workflows">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="AutoName" Type="varchar" MaxLength="600" Nullable="false" />
+          <Property Name="IsArchived" Type="bit" Nullable="false" />
+          <Property Name="VolumeId" Type="int" Nullable="false" />
+          <Property Name="DocumentLimitPerBatchQuantity" Type="int" Nullable="false" />
+          <Property Name="DocumentLimitPerBatchAlert" Type="int" Nullable="false" />
+          <Property Name="PageLimitPerDocumentAlert" Type="int" Nullable="false" />
+          <Property Name="PageLimitPerDocumentQuantity" Type="int" Nullable="false" />
+          <Property Name="SpecialPermissions" Type="nvarchar(max)" />
+          <Property Name="HasAutomaticAssignmentForDocuments" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkflowSplitters">
+          <Key>
+            <PropertyRef Name="WorkflowSplitterId" />
+          </Key>
+          <Property Name="WorkflowSplitterId" Type="int" Nullable="false" />
+          <Property Name="ReaderColorMode" Type="int" Nullable="false" />
+          <Property Name="ReaderTimeOut" Type="int" />
+          <Property Name="Orientation" Type="int" Nullable="false" />
+          <Property Name="CoordinateX" Type="real" Nullable="false" />
+          <Property Name="CoordinateY" Type="real" Nullable="false" />
+          <Property Name="Width" Type="real" Nullable="false" />
+          <Property Name="Height" Type="real" Nullable="false" />
+          <Property Name="CodeFormat" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="ExpectedValue" Type="varchar" MaxLength="400" Nullable="false" />
+          <Property Name="KeepPage" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkflowStepsConfigurations">
+          <Key>
+            <PropertyRef Name="WorkflowStepsConfigurationId" />
+          </Key>
+          <Property Name="WorkflowStepsConfigurationId" Type="int" Nullable="false" />
+          <Property Name="QaScanScannedDocumentsPercent" Type="int" Nullable="false" />
+          <Property Name="QaScanDocumentsApprovementPercent" Type="int" Nullable="false" />
+          <Property Name="QaIndexScannedDocumentsPercent" Type="int" Nullable="false" />
+          <Property Name="QaIndexDocumentsApprovementPercent" Type="int" Nullable="false" />
+          <Property Name="IndexingNumbers" Type="int" Nullable="false" />
+          <Property Name="HasIndexSupervision" Type="bit" Nullable="false" />
+          <Property Name="HasExternalValidation" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_BatchAssignments_dbo_Batches_BatchId">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="BatchAssignments" Type="Self.BatchAssignments" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatchAssignments">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Batches_dbo_Workflows_WorkflowId">
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batches" Type="Self.Batches" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Batches">
+              <PropertyRef Name="WorkflowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BatchExternalProperties_dbo_Batches_BatchId">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BatchExternalProperties" Type="Self.BatchExternalProperties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatchExternalProperties">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BatchExternalProperties_dbo_ExternalProperties_ExternalPropertyId">
+          <End Role="ExternalProperties" Type="Self.ExternalProperties" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BatchExternalProperties" Type="Self.BatchExternalProperties" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExternalProperties">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatchExternalProperties">
+              <PropertyRef Name="ExternalPropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentAssignments_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="1" />
+          <End Role="DocumentAssignments" Type="Self.DocumentAssignments" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentAssignments">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentBarcodeMetadatas_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DocumentBarcodeMetadatas" Type="Self.DocumentBarcodeMetadatas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentBarcodeMetadatas">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentComments_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DocumentComments" Type="Self.DocumentComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentComments">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentQrMetadatas_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="1" />
+          <End Role="DocumentQrMetadatas" Type="Self.DocumentQrMetadatas" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentQrMetadatas">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Documents_dbo_Batches_BatchId">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentsSplitters_dbo_Workflows_WorkflowDocumentSplitterId">
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="1" />
+          <End Role="DocumentsSplitters" Type="Self.DocumentsSplitters" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentsSplitters">
+              <PropertyRef Name="WorkflowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentsUserActions_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DocumentsUserActions" Type="Self.DocumentsUserActions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentsUserActions">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExternalPropertiesWorkflowAssigments_dbo_ExternalProperties_ExternalPropertyId">
+          <End Role="ExternalProperties" Type="Self.ExternalProperties" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ExternalPropertiesWorkflowAssigments" Type="Self.ExternalPropertiesWorkflowAssigments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExternalProperties">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExternalPropertiesWorkflowAssigments">
+              <PropertyRef Name="ExternalPropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ExternalPropertiesWorkflowAssigments_dbo_Workflows_WorkflowId">
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ExternalPropertiesWorkflowAssigments" Type="Self.ExternalPropertiesWorkflowAssigments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ExternalPropertiesWorkflowAssigments">
+              <PropertyRef Name="WorkflowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Indices_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Indices" Type="Self.Indices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Indices">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PageQrMetadatas_dbo_Pages_PageId">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="1" />
+          <End Role="PageQrMetadatas" Type="Self.PageQrMetadatas" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PageQrMetadatas">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pages_dbo_Batches_BatchId">
+          <End Role="Batches" Type="Self.Batches" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pages_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="0..1" />
+          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RoleScannerProfilesAssignments_dbo_ScannerProfiles_ScannerProfileId">
+          <End Role="ScannerProfiles" Type="Self.ScannerProfiles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RoleScannerProfilesAssignments" Type="Self.RoleScannerProfilesAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScannerProfiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleScannerProfilesAssignments">
+              <PropertyRef Name="ScannerProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RoleWorkflowsAssignments_dbo_Workflows_WorkflowId">
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RoleWorkflowAssignments" Type="Self.RoleWorkflowAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleWorkflowAssignments">
+              <PropertyRef Name="WorkflowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ScannerProfiles_dbo_PaperSizeConfigurations_PaperSizeConfigurationId">
+          <End Role="PaperSizeConfigurations" Type="Self.PaperSizeConfigurations" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ScannerProfiles" Type="Self.ScannerProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaperSizeConfigurations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScannerProfiles">
+              <PropertyRef Name="PaperSizeConfigurationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ScannerProfiles_dbo_PixelTypeConfigurations_PixelTypeConfigurationId">
+          <End Role="PixelTypeConfigurations" Type="Self.PixelTypeConfigurations" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ScannerProfiles" Type="Self.ScannerProfiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PixelTypeConfigurations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScannerProfiles">
+              <PropertyRef Name="PixelTypeConfigurationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WorkflowDocumentTypesAssignments_dbo_Workflows_WorkflowId">
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkflowDocumentTypeAssignments" Type="Self.WorkflowDocumentTypeAssignments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkflowDocumentTypeAssignments">
+              <PropertyRef Name="WorkflowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Workflows_dbo_Volumes_VolumeId">
+          <End Role="Volumes" Type="Self.Volumes" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Volumes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workflows">
+              <PropertyRef Name="VolumeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WorkflowSplitters_dbo_Workflows_WorkflowSplitterId">
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="1" />
+          <End Role="WorkflowSplitters" Type="Self.WorkflowSplitters" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkflowSplitters">
+              <PropertyRef Name="WorkflowSplitterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WorkflowStepsConfigurations_dbo_Workflows_WorkflowStepsConfigurationId">
+          <End Role="Workflows" Type="Self.Workflows" Multiplicity="1" />
+          <End Role="WorkflowStepsConfigurations" Type="Self.WorkflowStepsConfigurations" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkflowStepsConfigurations">
+              <PropertyRef Name="WorkflowStepsConfigurationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProdoctivityCaptureDBModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ActiveInstanceServices" EntityType="Self.ActiveInstanceServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BatchAssignments" EntityType="Self.BatchAssignments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Batches" EntityType="Self.Batches" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BatchExternalProperties" EntityType="Self.BatchExternalProperties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ComposedBarcodeConfigurations" EntityType="Self.ComposedBarcodeConfigurations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomReportConfigurations" EntityType="Self.CustomReportConfigurations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentAssignments" EntityType="Self.DocumentAssignments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentBarcodeMetadatas" EntityType="Self.DocumentBarcodeMetadatas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentComments" EntityType="Self.DocumentComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentQrMetadatas" EntityType="Self.DocumentQrMetadatas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentsSplitters" EntityType="Self.DocumentsSplitters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DocumentsUserActions" EntityType="Self.DocumentsUserActions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExternalProperties" EntityType="Self.ExternalProperties" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExternalPropertiesWorkflowAssigments" EntityType="Self.ExternalPropertiesWorkflowAssigments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Indices" EntityType="Self.Indices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InstanceConfigurations" EntityType="Self.InstanceConfigurations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginAudits" EntityType="Self.LoginAudits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PageQrMetadatas" EntityType="Self.PageQrMetadatas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaperSizeConfigurations" EntityType="Self.PaperSizeConfigurations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PixelTypeConfigurations" EntityType="Self.PixelTypeConfigurations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QueueManagementConfigurations" EntityType="Self.QueueManagementConfigurations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleScannerProfilesAssignments" EntityType="Self.RoleScannerProfilesAssignments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RolesSpecialPermissions" EntityType="Self.RolesSpecialPermissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoleWorkflowAssignments" EntityType="Self.RoleWorkflowAssignments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScannerProfiles" EntityType="Self.ScannerProfiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserActionLogs" EntityType="Self.UserActionLogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Volumes" EntityType="Self.Volumes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebHookClients" EntityType="Self.WebHookClients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkflowDocumentTypeAssignments" EntityType="Self.WorkflowDocumentTypeAssignments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workflows" EntityType="Self.Workflows" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkflowSplitters" EntityType="Self.WorkflowSplitters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkflowStepsConfigurations" EntityType="Self.WorkflowStepsConfigurations" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_BatchAssignments_dbo_Batches_BatchId" Association="Self.FK_dbo_BatchAssignments_dbo_Batches_BatchId">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="BatchAssignments" EntitySet="BatchAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Batches_dbo_Workflows_WorkflowId" Association="Self.FK_dbo_Batches_dbo_Workflows_WorkflowId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="Batches" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BatchExternalProperties_dbo_Batches_BatchId" Association="Self.FK_dbo_BatchExternalProperties_dbo_Batches_BatchId">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="BatchExternalProperties" EntitySet="BatchExternalProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BatchExternalProperties_dbo_ExternalProperties_ExternalPropertyId" Association="Self.FK_dbo_BatchExternalProperties_dbo_ExternalProperties_ExternalPropertyId">
+            <End Role="ExternalProperties" EntitySet="ExternalProperties" />
+            <End Role="BatchExternalProperties" EntitySet="BatchExternalProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DocumentAssignments_dbo_Documents_DocumentId" Association="Self.FK_dbo_DocumentAssignments_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentAssignments" EntitySet="DocumentAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DocumentBarcodeMetadatas_dbo_Documents_DocumentId" Association="Self.FK_dbo_DocumentBarcodeMetadatas_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentBarcodeMetadatas" EntitySet="DocumentBarcodeMetadatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DocumentComments_dbo_Documents_DocumentId" Association="Self.FK_dbo_DocumentComments_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentComments" EntitySet="DocumentComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DocumentQrMetadatas_dbo_Documents_DocumentId" Association="Self.FK_dbo_DocumentQrMetadatas_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentQrMetadatas" EntitySet="DocumentQrMetadatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Documents_dbo_Batches_BatchId" Association="Self.FK_dbo_Documents_dbo_Batches_BatchId">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DocumentsSplitters_dbo_Workflows_WorkflowDocumentSplitterId" Association="Self.FK_dbo_DocumentsSplitters_dbo_Workflows_WorkflowDocumentSplitterId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="DocumentsSplitters" EntitySet="DocumentsSplitters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DocumentsUserActions_dbo_Documents_DocumentId" Association="Self.FK_dbo_DocumentsUserActions_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentsUserActions" EntitySet="DocumentsUserActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExternalPropertiesWorkflowAssigments_dbo_ExternalProperties_ExternalPropertyId" Association="Self.FK_dbo_ExternalPropertiesWorkflowAssigments_dbo_ExternalProperties_ExternalPropertyId">
+            <End Role="ExternalProperties" EntitySet="ExternalProperties" />
+            <End Role="ExternalPropertiesWorkflowAssigments" EntitySet="ExternalPropertiesWorkflowAssigments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ExternalPropertiesWorkflowAssigments_dbo_Workflows_WorkflowId" Association="Self.FK_dbo_ExternalPropertiesWorkflowAssigments_dbo_Workflows_WorkflowId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="ExternalPropertiesWorkflowAssigments" EntitySet="ExternalPropertiesWorkflowAssigments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Indices_dbo_Documents_DocumentId" Association="Self.FK_dbo_Indices_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="Indices" EntitySet="Indices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PageQrMetadatas_dbo_Pages_PageId" Association="Self.FK_dbo_PageQrMetadatas_dbo_Pages_PageId">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="PageQrMetadatas" EntitySet="PageQrMetadatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pages_dbo_Batches_BatchId" Association="Self.FK_dbo_Pages_dbo_Batches_BatchId">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pages_dbo_Documents_DocumentId" Association="Self.FK_dbo_Pages_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RoleScannerProfilesAssignments_dbo_ScannerProfiles_ScannerProfileId" Association="Self.FK_dbo_RoleScannerProfilesAssignments_dbo_ScannerProfiles_ScannerProfileId">
+            <End Role="ScannerProfiles" EntitySet="ScannerProfiles" />
+            <End Role="RoleScannerProfilesAssignments" EntitySet="RoleScannerProfilesAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RoleWorkflowsAssignments_dbo_Workflows_WorkflowId" Association="Self.FK_dbo_RoleWorkflowsAssignments_dbo_Workflows_WorkflowId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="RoleWorkflowAssignments" EntitySet="RoleWorkflowAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ScannerProfiles_dbo_PaperSizeConfigurations_PaperSizeConfigurationId" Association="Self.FK_dbo_ScannerProfiles_dbo_PaperSizeConfigurations_PaperSizeConfigurationId">
+            <End Role="PaperSizeConfigurations" EntitySet="PaperSizeConfigurations" />
+            <End Role="ScannerProfiles" EntitySet="ScannerProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ScannerProfiles_dbo_PixelTypeConfigurations_PixelTypeConfigurationId" Association="Self.FK_dbo_ScannerProfiles_dbo_PixelTypeConfigurations_PixelTypeConfigurationId">
+            <End Role="PixelTypeConfigurations" EntitySet="PixelTypeConfigurations" />
+            <End Role="ScannerProfiles" EntitySet="ScannerProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WorkflowDocumentTypesAssignments_dbo_Workflows_WorkflowId" Association="Self.FK_dbo_WorkflowDocumentTypesAssignments_dbo_Workflows_WorkflowId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="WorkflowDocumentTypeAssignments" EntitySet="WorkflowDocumentTypeAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Workflows_dbo_Volumes_VolumeId" Association="Self.FK_dbo_Workflows_dbo_Volumes_VolumeId">
+            <End Role="Volumes" EntitySet="Volumes" />
+            <End Role="Workflows" EntitySet="Workflows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WorkflowSplitters_dbo_Workflows_WorkflowSplitterId" Association="Self.FK_dbo_WorkflowSplitters_dbo_Workflows_WorkflowSplitterId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="WorkflowSplitters" EntitySet="WorkflowSplitters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WorkflowStepsConfigurations_dbo_Workflows_WorkflowStepsConfigurationId" Association="Self.FK_dbo_WorkflowStepsConfigurations_dbo_Workflows_WorkflowStepsConfigurationId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="WorkflowStepsConfigurations" EntitySet="WorkflowStepsConfigurations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProdoctivityCaptureDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ActiveInstanceService">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProcessName" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="Path" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceType" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BatchAssignment">
+          <Key>
+            <PropertyRef Name="BatchId" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BatchId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_dbo_BatchAssignments_dbo_Batches_BatchId" FromRole="BatchAssignments" ToRole="Batches" />
+        </EntityType>
+        <EntityType Name="Batch">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WorkflowId" Type="Int32" Nullable="false" />
+          <Property Name="BatchStatus" Type="Int32" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Username" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="BatchPages" Type="Int32" Nullable="false" />
+          <Property Name="IsAssignedAsDocument" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BatchAssignment" Relationship="Self.FK_dbo_BatchAssignments_dbo_Batches_BatchId" FromRole="Batches" ToRole="BatchAssignments" />
+          <NavigationProperty Name="Workflow" Relationship="Self.FK_dbo_Batches_dbo_Workflows_WorkflowId" FromRole="Batches" ToRole="Workflows" />
+          <NavigationProperty Name="BatchExternalProperties" Relationship="Self.FK_dbo_BatchExternalProperties_dbo_Batches_BatchId" FromRole="Batches" ToRole="BatchExternalProperties" />
+          <NavigationProperty Name="Documents" Relationship="Self.FK_dbo_Documents_dbo_Batches_BatchId" FromRole="Batches" ToRole="Documents" />
+          <NavigationProperty Name="Pages" Relationship="Self.FK_dbo_Pages_dbo_Batches_BatchId" FromRole="Batches" ToRole="Pages" />
+        </EntityType>
+        <EntityType Name="BatchExternalProperty">
+          <Key>
+            <PropertyRef Name="ExternalPropertyId" />
+            <PropertyRef Name="BatchId" />
+          </Key>
+          <Property Name="ExternalPropertyId" Type="Int32" Nullable="false" />
+          <Property Name="BatchId" Type="Int64" Nullable="false" />
+          <Property Name="ExternalPropertyValue" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_dbo_BatchExternalProperties_dbo_Batches_BatchId" FromRole="BatchExternalProperties" ToRole="Batches" />
+          <NavigationProperty Name="ExternalProperty" Relationship="Self.FK_dbo_BatchExternalProperties_dbo_ExternalProperties_ExternalPropertyId" FromRole="BatchExternalProperties" ToRole="ExternalProperties" />
+        </EntityType>
+        <EntityType Name="ComposedBarcodeConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InitialPosition" Type="Int32" Nullable="false" />
+          <Property Name="FinalPosition" Type="Int32" Nullable="false" />
+          <Property Name="ElementType" Type="Int32" Nullable="false" />
+          <Property Name="Example" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ExtractedData" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="BarcodeFormat" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CustomReportConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcedureName" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UsedParameters" Type="Boolean" />
+          <Property Name="CustomReportSourceTitle" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DocumentAssignment">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int64" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Document" Relationship="Self.FK_dbo_DocumentAssignments_dbo_Documents_DocumentId" FromRole="DocumentAssignments" ToRole="Documents" />
+        </EntityType>
+        <EntityType Name="DocumentBarcodeMetadata">
+          <Key>
+            <PropertyRef Name="MetadataId" />
+          </Key>
+          <Property Name="MetadataId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentId" Type="Int64" Nullable="false" />
+          <Property Name="SplitterElementType" Type="Int32" Nullable="false" />
+          <Property Name="ExtractedInfo" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Document" Relationship="Self.FK_dbo_DocumentBarcodeMetadatas_dbo_Documents_DocumentId" FromRole="DocumentBarcodeMetadatas" ToRole="Documents" />
+        </EntityType>
+        <EntityType Name="DocumentComment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentId" Type="Int64" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="User" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Document" Relationship="Self.FK_dbo_DocumentComments_dbo_Documents_DocumentId" FromRole="DocumentComments" ToRole="Documents" />
+        </EntityType>
+        <EntityType Name="DocumentQrMetadata">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int64" Nullable="false" />
+          <Property Name="DocumentHandle" Type="Int64" Nullable="false" />
+          <Property Name="PageQuantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Document" Relationship="Self.FK_dbo_DocumentQrMetadatas_dbo_Documents_DocumentId" FromRole="DocumentQrMetadatas" ToRole="Documents" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchId" Type="Int64" Nullable="false" />
+          <Property Name="DocumentType" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_dbo_Documents_dbo_Batches_BatchId" FromRole="Documents" ToRole="Batches" />
+          <NavigationProperty Name="DocumentAssignment" Relationship="Self.FK_dbo_DocumentAssignments_dbo_Documents_DocumentId" FromRole="Documents" ToRole="DocumentAssignments" />
+          <NavigationProperty Name="DocumentBarcodeMetadatas" Relationship="Self.FK_dbo_DocumentBarcodeMetadatas_dbo_Documents_DocumentId" FromRole="Documents" ToRole="DocumentBarcodeMetadatas" />
+          <NavigationProperty Name="DocumentComments" Relationship="Self.FK_dbo_DocumentComments_dbo_Documents_DocumentId" FromRole="Documents" ToRole="DocumentComments" />
+          <NavigationProperty Name="DocumentQrMetadata" Relationship="Self.FK_dbo_DocumentQrMetadatas_dbo_Documents_DocumentId" FromRole="Documents" ToRole="DocumentQrMetadatas" />
+          <NavigationProperty Name="DocumentsUserActions" Relationship="Self.FK_dbo_DocumentsUserActions_dbo_Documents_DocumentId" FromRole="Documents" ToRole="DocumentsUserActions" />
+          <NavigationProperty Name="Indices" Relationship="Self.FK_dbo_Indices_dbo_Documents_DocumentId" FromRole="Documents" ToRole="Indices" />
+          <NavigationProperty Name="Pages" Relationship="Self.FK_dbo_Pages_dbo_Documents_DocumentId" FromRole="Documents" ToRole="Pages" />
+        </EntityType>
+        <EntityType Name="DocumentsSplitter">
+          <Key>
+            <PropertyRef Name="WorkflowId" />
+          </Key>
+          <Property Name="WorkflowId" Type="Int32" Nullable="false" />
+          <Property Name="DocumentSplitterType" Type="Int32" Nullable="false" />
+          <Property Name="BarcodeValue" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="Configuration" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="SeparatorExpectedValue" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Workflow" Relationship="Self.FK_dbo_DocumentsSplitters_dbo_Workflows_WorkflowDocumentSplitterId" FromRole="DocumentsSplitters" ToRole="Workflows" />
+        </EntityType>
+        <EntityType Name="DocumentsUserAction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentId" Type="Int64" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="DocumentAction" Type="Int32" Nullable="false" />
+          <Property Name="RegisterDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Document" Relationship="Self.FK_dbo_DocumentsUserActions_dbo_Documents_DocumentId" FromRole="DocumentsUserActions" ToRole="Documents" />
+        </EntityType>
+        <EntityType Name="ExternalProperty">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BatchExternalProperties" Relationship="Self.FK_dbo_BatchExternalProperties_dbo_ExternalProperties_ExternalPropertyId" FromRole="ExternalProperties" ToRole="BatchExternalProperties" />
+          <NavigationProperty Name="Workflows" Relationship="Self.ExternalPropertiesWorkflowAssigments" FromRole="ExternalProperties" ToRole="Workflows" />
+        </EntityType>
+        <EntityType Name="Index">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DocumentId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Document" Relationship="Self.FK_dbo_Indices_dbo_Documents_DocumentId" FromRole="Indices" ToRole="Documents" />
+        </EntityType>
+        <EntityType Name="InstanceConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigurationName" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoginAudit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AttemptDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsLoginSuccessful" Type="Boolean" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PageQrMetadata">
+          <Key>
+            <PropertyRef Name="PageId" />
+          </Key>
+          <Property Name="PageId" Type="Int64" Nullable="false" />
+          <Property Name="PageNumber" Type="Int32" Nullable="false" />
+          <Property Name="DocumentHandle" Type="Int32" Nullable="false" />
+          <Property Name="Qrcode" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Page" Relationship="Self.FK_dbo_PageQrMetadatas_dbo_Pages_PageId" FromRole="PageQrMetadatas" ToRole="Pages" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BatchId" Type="Int64" Nullable="false" />
+          <Property Name="Filename" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
+          <Property Name="DocumentId" Type="Int64" />
+          <Property Name="Version" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Batch" Relationship="Self.FK_dbo_Pages_dbo_Batches_BatchId" FromRole="Pages" ToRole="Batches" />
+          <NavigationProperty Name="Document" Relationship="Self.FK_dbo_Pages_dbo_Documents_DocumentId" FromRole="Pages" ToRole="Documents" />
+          <NavigationProperty Name="PageQrMetadata" Relationship="Self.FK_dbo_PageQrMetadatas_dbo_Pages_PageId" FromRole="Pages" ToRole="PageQrMetadatas" />
+        </EntityType>
+        <EntityType Name="PaperSizeConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ScannerProfiles" Relationship="Self.FK_dbo_ScannerProfiles_dbo_PaperSizeConfigurations_PaperSizeConfigurationId" FromRole="PaperSizeConfigurations" ToRole="ScannerProfiles" />
+        </EntityType>
+        <EntityType Name="PixelTypeConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ScannerProfiles" Relationship="Self.FK_dbo_ScannerProfiles_dbo_PixelTypeConfigurations_PixelTypeConfigurationId" FromRole="PixelTypeConfigurations" ToRole="ScannerProfiles" />
+        </EntityType>
+        <EntityType Name="QueueManagementConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServerUrl" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="QueueName" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Exchange" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleScannerProfilesAssignment">
+          <Key>
+            <PropertyRef Name="ScannerProfileId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ScannerProfileId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ScannerProfile" Relationship="Self.FK_dbo_RoleScannerProfilesAssignments_dbo_ScannerProfiles_ScannerProfileId" FromRole="RoleScannerProfilesAssignments" ToRole="ScannerProfiles" />
+        </EntityType>
+        <EntityType Name="RolesSpecialPermission">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="HasWorkflowsAdministration" Type="Boolean" Nullable="false" />
+          <Property Name="HasBatchesControl" Type="Boolean" Nullable="false" />
+          <Property Name="HasReleaseBatches" Type="Boolean" Nullable="false" />
+          <Property Name="HasDeleteBatches" Type="Boolean" Nullable="false" />
+          <Property Name="HasRenameBatches" Type="Boolean" Nullable="false" />
+          <Property Name="HasUnblockBatches" Type="Boolean" Nullable="false" />
+          <Property Name="HasDeletePages" Type="Boolean" Nullable="false" />
+          <Property Name="HasApproveAllDocuments" Type="Boolean" Nullable="false" />
+          <Property Name="HasIndexOnSupervision" Type="Boolean" Nullable="false" />
+          <Property Name="CanReleaseOnDigitalizationException" Type="Boolean" Nullable="false" />
+          <Property Name="CanWorkWithRandomAssignation" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoleWorkflowAssignment">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="WorkflowId" />
+          </Key>
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="WorkflowId" Type="Int32" Nullable="false" />
+          <Property Name="QueuePermissions" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Workflow" Relationship="Self.FK_dbo_RoleWorkflowsAssignments_dbo_Workflows_WorkflowId" FromRole="RoleWorkflowAssignments" ToRole="Workflows" />
+        </EntityType>
+        <EntityType Name="ScannerProfile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="ProfileStatus" Type="Int32" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Username" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AutomaticBrightness" Type="Boolean" Nullable="false" />
+          <Property Name="BothSides" Type="Boolean" Nullable="false" />
+          <Property Name="AutomaticFeeding" Type="Boolean" Nullable="false" />
+          <Property Name="AutomaticScan" Type="Boolean" Nullable="false" />
+          <Property Name="ImageQuality" Type="Int32" Nullable="false" />
+          <Property Name="Resolution" Type="Int32" Nullable="false" />
+          <Property Name="AutoDetectedSize" Type="Boolean" Nullable="false" />
+          <Property Name="SkipBlankPage" Type="Boolean" Nullable="false" />
+          <Property Name="AutomaticAlignment" Type="Boolean" Nullable="false" />
+          <Property Name="ScannerUi" Type="Boolean" Nullable="false" />
+          <Property Name="ShowIndicator" Type="Boolean" Nullable="false" />
+          <Property Name="PixelTypeConfigurationId" Type="Int32" Nullable="false" />
+          <Property Name="PaperSizeConfigurationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PaperSizeConfiguration" Relationship="Self.FK_dbo_ScannerProfiles_dbo_PaperSizeConfigurations_PaperSizeConfigurationId" FromRole="ScannerProfiles" ToRole="PaperSizeConfigurations" />
+          <NavigationProperty Name="PixelTypeConfiguration" Relationship="Self.FK_dbo_ScannerProfiles_dbo_PixelTypeConfigurations_PixelTypeConfigurationId" FromRole="ScannerProfiles" ToRole="PixelTypeConfigurations" />
+          <NavigationProperty Name="RoleScannerProfilesAssignments" Relationship="Self.FK_dbo_RoleScannerProfilesAssignments_dbo_ScannerProfiles_ScannerProfileId" FromRole="ScannerProfiles" ToRole="RoleScannerProfilesAssignments" />
+        </EntityType>
+        <EntityType Name="UserActionLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="AuditedAction" Type="Int32" Nullable="false" />
+          <Property Name="AuditDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Volume">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="Int32" Nullable="false" />
+          <Property Name="Path" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Workflows" Relationship="Self.FK_dbo_Workflows_dbo_Volumes_VolumeId" FromRole="Volumes" ToRole="Workflows" />
+        </EntityType>
+        <EntityType Name="WebHookClient">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConfigurationName" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="Methodtype" Type="Int32" Nullable="false" />
+          <Property Name="Timeout" Type="Single" Nullable="false" />
+          <Property Name="ClientServer" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="ClientResource" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="SubscriptionType" Type="Int32" Nullable="false" />
+          <Property Name="EventType" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkflowDocumentTypeAssignment">
+          <Key>
+            <PropertyRef Name="WorkflowId" />
+            <PropertyRef Name="DocumentTypeId" />
+          </Key>
+          <Property Name="WorkflowId" Type="Int32" Nullable="false" />
+          <Property Name="DocumentTypeId" Type="Int32" Nullable="false" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Workflow" Relationship="Self.FK_dbo_WorkflowDocumentTypesAssignments_dbo_Workflows_WorkflowId" FromRole="WorkflowDocumentTypeAssignments" ToRole="Workflows" />
+        </EntityType>
+        <EntityType Name="Workflow">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AutoName" Type="String" MaxLength="600" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsArchived" Type="Boolean" Nullable="false" />
+          <Property Name="VolumeId" Type="Int32" Nullable="false" />
+          <Property Name="DocumentLimitPerBatchQuantity" Type="Int32" Nullable="false" />
+          <Property Name="DocumentLimitPerBatchAlert" Type="Int32" Nullable="false" />
+          <Property Name="PageLimitPerDocumentAlert" Type="Int32" Nullable="false" />
+          <Property Name="PageLimitPerDocumentQuantity" Type="Int32" Nullable="false" />
+          <Property Name="SpecialPermissions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HasAutomaticAssignmentForDocuments" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Batches" Relationship="Self.FK_dbo_Batches_dbo_Workflows_WorkflowId" FromRole="Workflows" ToRole="Batches" />
+          <NavigationProperty Name="DocumentsSplitter" Relationship="Self.FK_dbo_DocumentsSplitters_dbo_Workflows_WorkflowDocumentSplitterId" FromRole="Workflows" ToRole="DocumentsSplitters" />
+          <NavigationProperty Name="RoleWorkflowAssignments" Relationship="Self.FK_dbo_RoleWorkflowsAssignments_dbo_Workflows_WorkflowId" FromRole="Workflows" ToRole="RoleWorkflowAssignments" />
+          <NavigationProperty Name="Volume" Relationship="Self.FK_dbo_Workflows_dbo_Volumes_VolumeId" FromRole="Workflows" ToRole="Volumes" />
+          <NavigationProperty Name="WorkflowDocumentTypeAssignments" Relationship="Self.FK_dbo_WorkflowDocumentTypesAssignments_dbo_Workflows_WorkflowId" FromRole="Workflows" ToRole="WorkflowDocumentTypeAssignments" />
+          <NavigationProperty Name="WorkflowSplitter" Relationship="Self.FK_dbo_WorkflowSplitters_dbo_Workflows_WorkflowSplitterId" FromRole="Workflows" ToRole="WorkflowSplitters" />
+          <NavigationProperty Name="WorkflowStepsConfiguration" Relationship="Self.FK_dbo_WorkflowStepsConfigurations_dbo_Workflows_WorkflowStepsConfigurationId" FromRole="Workflows" ToRole="WorkflowStepsConfigurations" />
+          <NavigationProperty Name="ExternalProperties" Relationship="Self.ExternalPropertiesWorkflowAssigments" FromRole="Workflows" ToRole="ExternalProperties" />
+        </EntityType>
+        <EntityType Name="WorkflowSplitter">
+          <Key>
+            <PropertyRef Name="WorkflowSplitterId" />
+          </Key>
+          <Property Name="WorkflowSplitterId" Type="Int32" Nullable="false" />
+          <Property Name="ReaderColorMode" Type="Int32" Nullable="false" />
+          <Property Name="ReaderTimeOut" Type="Int32" />
+          <Property Name="Orientation" Type="Int32" Nullable="false" />
+          <Property Name="CoordinateX" Type="Single" Nullable="false" />
+          <Property Name="CoordinateY" Type="Single" Nullable="false" />
+          <Property Name="Width" Type="Single" Nullable="false" />
+          <Property Name="Height" Type="Single" Nullable="false" />
+          <Property Name="CodeFormat" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ExpectedValue" Type="String" MaxLength="400" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="KeepPage" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Workflow" Relationship="Self.FK_dbo_WorkflowSplitters_dbo_Workflows_WorkflowSplitterId" FromRole="WorkflowSplitters" ToRole="Workflows" />
+        </EntityType>
+        <EntityType Name="WorkflowStepsConfiguration">
+          <Key>
+            <PropertyRef Name="WorkflowStepsConfigurationId" />
+          </Key>
+          <Property Name="WorkflowStepsConfigurationId" Type="Int32" Nullable="false" />
+          <Property Name="QaScanScannedDocumentsPercent" Type="Int32" Nullable="false" />
+          <Property Name="QaScanDocumentsApprovementPercent" Type="Int32" Nullable="false" />
+          <Property Name="QaIndexScannedDocumentsPercent" Type="Int32" Nullable="false" />
+          <Property Name="QaIndexDocumentsApprovementPercent" Type="Int32" Nullable="false" />
+          <Property Name="IndexingNumbers" Type="Int32" Nullable="false" />
+          <Property Name="HasIndexSupervision" Type="Boolean" Nullable="false" />
+          <Property Name="HasExternalValidation" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Workflow" Relationship="Self.FK_dbo_WorkflowStepsConfigurations_dbo_Workflows_WorkflowStepsConfigurationId" FromRole="WorkflowStepsConfigurations" ToRole="Workflows" />
+        </EntityType>
+        <Association Name="FK_dbo_BatchAssignments_dbo_Batches_BatchId">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="BatchAssignments" Type="Self.BatchAssignment" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatchAssignments">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Batches_dbo_Workflows_WorkflowId">
+          <End Role="Workflows" Type="Self.Workflow" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batches" Type="Self.Batch" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Batches">
+              <PropertyRef Name="WorkflowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BatchExternalProperties_dbo_Batches_BatchId">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BatchExternalProperties" Type="Self.BatchExternalProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatchExternalProperties">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Documents_dbo_Batches_BatchId">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1" />
+          <End Role="Documents" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pages_dbo_Batches_BatchId">
+          <End Role="Batches" Type="Self.Batch" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Pages" Type="Self.Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batches">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="BatchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_BatchExternalProperties_dbo_ExternalProperties_ExternalPropertyId">
+          <End Role="ExternalProperties" Type="Self.ExternalProperty" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BatchExternalProperties" Type="Self.BatchExternalProperty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ExternalProperties">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatchExternalProperties">
+              <PropertyRef Name="ExternalPropertyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentAssignments_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Document" Multiplicity="1" />
+          <End Role="DocumentAssignments" Type="Self.DocumentAssignment" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentAssignments">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentBarcodeMetadatas_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Document" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DocumentBarcodeMetadatas" Type="Self.DocumentBarcodeMetadata" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentBarcodeMetadatas">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentComments_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Document" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DocumentComments" Type="Self.DocumentComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentComments">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentQrMetadatas_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Document" Multiplicity="1" />
+          <End Role="DocumentQrMetadatas" Type="Self.DocumentQrMetadata" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentQrMetadatas">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentsUserActions_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Document" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DocumentsUserActions" Type="Self.DocumentsUserAction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentsUserActions">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Indices_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Document" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Indices" Type="Self.Index" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Indices">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pages_dbo_Documents_DocumentId">
+          <End Role="Documents" Type="Self.Document" Multiplicity="0..1" />
+          <End Role="Pages" Type="Self.Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Pages">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_DocumentsSplitters_dbo_Workflows_WorkflowDocumentSplitterId">
+          <End Role="Workflows" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="DocumentsSplitters" Type="Self.DocumentsSplitter" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DocumentsSplitters">
+              <PropertyRef Name="WorkflowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PageQrMetadatas_dbo_Pages_PageId">
+          <End Role="Pages" Type="Self.Page" Multiplicity="1" />
+          <End Role="PageQrMetadatas" Type="Self.PageQrMetadata" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PageQrMetadatas">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ScannerProfiles_dbo_PaperSizeConfigurations_PaperSizeConfigurationId">
+          <End Role="PaperSizeConfigurations" Type="Self.PaperSizeConfiguration" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ScannerProfiles" Type="Self.ScannerProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaperSizeConfigurations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScannerProfiles">
+              <PropertyRef Name="PaperSizeConfigurationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ScannerProfiles_dbo_PixelTypeConfigurations_PixelTypeConfigurationId">
+          <End Role="PixelTypeConfigurations" Type="Self.PixelTypeConfiguration" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ScannerProfiles" Type="Self.ScannerProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PixelTypeConfigurations">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ScannerProfiles">
+              <PropertyRef Name="PixelTypeConfigurationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RoleScannerProfilesAssignments_dbo_ScannerProfiles_ScannerProfileId">
+          <End Role="ScannerProfiles" Type="Self.ScannerProfile" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RoleScannerProfilesAssignments" Type="Self.RoleScannerProfilesAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ScannerProfiles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleScannerProfilesAssignments">
+              <PropertyRef Name="ScannerProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_RoleWorkflowsAssignments_dbo_Workflows_WorkflowId">
+          <End Role="Workflows" Type="Self.Workflow" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RoleWorkflowAssignments" Type="Self.RoleWorkflowAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RoleWorkflowAssignments">
+              <PropertyRef Name="WorkflowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Workflows_dbo_Volumes_VolumeId">
+          <End Role="Volumes" Type="Self.Volume" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Workflows" Type="Self.Workflow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Volumes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Workflows">
+              <PropertyRef Name="VolumeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WorkflowDocumentTypesAssignments_dbo_Workflows_WorkflowId">
+          <End Role="Workflows" Type="Self.Workflow" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="WorkflowDocumentTypeAssignments" Type="Self.WorkflowDocumentTypeAssignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkflowDocumentTypeAssignments">
+              <PropertyRef Name="WorkflowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WorkflowSplitters_dbo_Workflows_WorkflowSplitterId">
+          <End Role="Workflows" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="WorkflowSplitters" Type="Self.WorkflowSplitter" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkflowSplitters">
+              <PropertyRef Name="WorkflowSplitterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_WorkflowStepsConfigurations_dbo_Workflows_WorkflowStepsConfigurationId">
+          <End Role="Workflows" Type="Self.Workflow" Multiplicity="1" />
+          <End Role="WorkflowStepsConfigurations" Type="Self.WorkflowStepsConfiguration" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Workflows">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkflowStepsConfigurations">
+              <PropertyRef Name="WorkflowStepsConfigurationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ExternalPropertiesWorkflowAssigments">
+          <End Role="ExternalProperties" Type="Self.ExternalProperty" Multiplicity="*" />
+          <End Role="Workflows" Type="Self.Workflow" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ProdoctivityCaptureDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="ActiveInstanceServices" EntityType="Self.ActiveInstanceService" />
+          <EntitySet Name="BatchAssignments" EntityType="Self.BatchAssignment" />
+          <EntitySet Name="Batches" EntityType="Self.Batch" />
+          <EntitySet Name="BatchExternalProperties" EntityType="Self.BatchExternalProperty" />
+          <EntitySet Name="ComposedBarcodeConfigurations" EntityType="Self.ComposedBarcodeConfiguration" />
+          <EntitySet Name="CustomReportConfigurations" EntityType="Self.CustomReportConfiguration" />
+          <EntitySet Name="DocumentAssignments" EntityType="Self.DocumentAssignment" />
+          <EntitySet Name="DocumentBarcodeMetadatas" EntityType="Self.DocumentBarcodeMetadata" />
+          <EntitySet Name="DocumentComments" EntityType="Self.DocumentComment" />
+          <EntitySet Name="DocumentQrMetadatas" EntityType="Self.DocumentQrMetadata" />
+          <EntitySet Name="Documents" EntityType="Self.Document" />
+          <EntitySet Name="DocumentsSplitters" EntityType="Self.DocumentsSplitter" />
+          <EntitySet Name="DocumentsUserActions" EntityType="Self.DocumentsUserAction" />
+          <EntitySet Name="ExternalProperties" EntityType="Self.ExternalProperty" />
+          <EntitySet Name="Indices" EntityType="Self.Index" />
+          <EntitySet Name="InstanceConfigurations" EntityType="Self.InstanceConfiguration" />
+          <EntitySet Name="LoginAudits" EntityType="Self.LoginAudit" />
+          <EntitySet Name="PageQrMetadatas" EntityType="Self.PageQrMetadata" />
+          <EntitySet Name="Pages" EntityType="Self.Page" />
+          <EntitySet Name="PaperSizeConfigurations" EntityType="Self.PaperSizeConfiguration" />
+          <EntitySet Name="PixelTypeConfigurations" EntityType="Self.PixelTypeConfiguration" />
+          <EntitySet Name="QueueManagementConfigurations" EntityType="Self.QueueManagementConfiguration" />
+          <EntitySet Name="RoleScannerProfilesAssignments" EntityType="Self.RoleScannerProfilesAssignment" />
+          <EntitySet Name="RolesSpecialPermissions" EntityType="Self.RolesSpecialPermission" />
+          <EntitySet Name="RoleWorkflowAssignments" EntityType="Self.RoleWorkflowAssignment" />
+          <EntitySet Name="ScannerProfiles" EntityType="Self.ScannerProfile" />
+          <EntitySet Name="UserActionLogs" EntityType="Self.UserActionLog" />
+          <EntitySet Name="Volumes" EntityType="Self.Volume" />
+          <EntitySet Name="WebHookClients" EntityType="Self.WebHookClient" />
+          <EntitySet Name="WorkflowDocumentTypeAssignments" EntityType="Self.WorkflowDocumentTypeAssignment" />
+          <EntitySet Name="Workflows" EntityType="Self.Workflow" />
+          <EntitySet Name="WorkflowSplitters" EntityType="Self.WorkflowSplitter" />
+          <EntitySet Name="WorkflowStepsConfigurations" EntityType="Self.WorkflowStepsConfiguration" />
+          <AssociationSet Name="FK_dbo_BatchAssignments_dbo_Batches_BatchId" Association="Self.FK_dbo_BatchAssignments_dbo_Batches_BatchId">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="BatchAssignments" EntitySet="BatchAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Batches_dbo_Workflows_WorkflowId" Association="Self.FK_dbo_Batches_dbo_Workflows_WorkflowId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="Batches" EntitySet="Batches" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BatchExternalProperties_dbo_Batches_BatchId" Association="Self.FK_dbo_BatchExternalProperties_dbo_Batches_BatchId">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="BatchExternalProperties" EntitySet="BatchExternalProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Documents_dbo_Batches_BatchId" Association="Self.FK_dbo_Documents_dbo_Batches_BatchId">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pages_dbo_Batches_BatchId" Association="Self.FK_dbo_Pages_dbo_Batches_BatchId">
+            <End Role="Batches" EntitySet="Batches" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_BatchExternalProperties_dbo_ExternalProperties_ExternalPropertyId" Association="Self.FK_dbo_BatchExternalProperties_dbo_ExternalProperties_ExternalPropertyId">
+            <End Role="ExternalProperties" EntitySet="ExternalProperties" />
+            <End Role="BatchExternalProperties" EntitySet="BatchExternalProperties" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DocumentAssignments_dbo_Documents_DocumentId" Association="Self.FK_dbo_DocumentAssignments_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentAssignments" EntitySet="DocumentAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DocumentBarcodeMetadatas_dbo_Documents_DocumentId" Association="Self.FK_dbo_DocumentBarcodeMetadatas_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentBarcodeMetadatas" EntitySet="DocumentBarcodeMetadatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DocumentComments_dbo_Documents_DocumentId" Association="Self.FK_dbo_DocumentComments_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentComments" EntitySet="DocumentComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DocumentQrMetadatas_dbo_Documents_DocumentId" Association="Self.FK_dbo_DocumentQrMetadatas_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentQrMetadatas" EntitySet="DocumentQrMetadatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DocumentsUserActions_dbo_Documents_DocumentId" Association="Self.FK_dbo_DocumentsUserActions_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="DocumentsUserActions" EntitySet="DocumentsUserActions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Indices_dbo_Documents_DocumentId" Association="Self.FK_dbo_Indices_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="Indices" EntitySet="Indices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pages_dbo_Documents_DocumentId" Association="Self.FK_dbo_Pages_dbo_Documents_DocumentId">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="Pages" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_DocumentsSplitters_dbo_Workflows_WorkflowDocumentSplitterId" Association="Self.FK_dbo_DocumentsSplitters_dbo_Workflows_WorkflowDocumentSplitterId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="DocumentsSplitters" EntitySet="DocumentsSplitters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PageQrMetadatas_dbo_Pages_PageId" Association="Self.FK_dbo_PageQrMetadatas_dbo_Pages_PageId">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="PageQrMetadatas" EntitySet="PageQrMetadatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ScannerProfiles_dbo_PaperSizeConfigurations_PaperSizeConfigurationId" Association="Self.FK_dbo_ScannerProfiles_dbo_PaperSizeConfigurations_PaperSizeConfigurationId">
+            <End Role="PaperSizeConfigurations" EntitySet="PaperSizeConfigurations" />
+            <End Role="ScannerProfiles" EntitySet="ScannerProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ScannerProfiles_dbo_PixelTypeConfigurations_PixelTypeConfigurationId" Association="Self.FK_dbo_ScannerProfiles_dbo_PixelTypeConfigurations_PixelTypeConfigurationId">
+            <End Role="PixelTypeConfigurations" EntitySet="PixelTypeConfigurations" />
+            <End Role="ScannerProfiles" EntitySet="ScannerProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RoleScannerProfilesAssignments_dbo_ScannerProfiles_ScannerProfileId" Association="Self.FK_dbo_RoleScannerProfilesAssignments_dbo_ScannerProfiles_ScannerProfileId">
+            <End Role="ScannerProfiles" EntitySet="ScannerProfiles" />
+            <End Role="RoleScannerProfilesAssignments" EntitySet="RoleScannerProfilesAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_RoleWorkflowsAssignments_dbo_Workflows_WorkflowId" Association="Self.FK_dbo_RoleWorkflowsAssignments_dbo_Workflows_WorkflowId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="RoleWorkflowAssignments" EntitySet="RoleWorkflowAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Workflows_dbo_Volumes_VolumeId" Association="Self.FK_dbo_Workflows_dbo_Volumes_VolumeId">
+            <End Role="Volumes" EntitySet="Volumes" />
+            <End Role="Workflows" EntitySet="Workflows" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WorkflowDocumentTypesAssignments_dbo_Workflows_WorkflowId" Association="Self.FK_dbo_WorkflowDocumentTypesAssignments_dbo_Workflows_WorkflowId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="WorkflowDocumentTypeAssignments" EntitySet="WorkflowDocumentTypeAssignments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WorkflowSplitters_dbo_Workflows_WorkflowSplitterId" Association="Self.FK_dbo_WorkflowSplitters_dbo_Workflows_WorkflowSplitterId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="WorkflowSplitters" EntitySet="WorkflowSplitters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_WorkflowStepsConfigurations_dbo_Workflows_WorkflowStepsConfigurationId" Association="Self.FK_dbo_WorkflowStepsConfigurations_dbo_Workflows_WorkflowStepsConfigurationId">
+            <End Role="Workflows" EntitySet="Workflows" />
+            <End Role="WorkflowStepsConfigurations" EntitySet="WorkflowStepsConfigurations" />
+          </AssociationSet>
+          <AssociationSet Name="ExternalPropertiesWorkflowAssigments" Association="Self.ExternalPropertiesWorkflowAssigments">
+            <End Role="ExternalProperties" EntitySet="ExternalProperties" />
+            <End Role="Workflows" EntitySet="Workflows" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProdoctivityCaptureDBModelStoreContainer" CdmEntityContainer="ProdoctivityCaptureDBEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ActiveInstanceServices">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.ActiveInstanceService">
+              <MappingFragment StoreEntitySet="ActiveInstanceServices">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="ProcessName" ColumnName="ProcessName" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="ServiceType" ColumnName="ServiceType" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BatchAssignments">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.BatchAssignment">
+              <MappingFragment StoreEntitySet="BatchAssignments">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Batches">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.Batch">
+              <MappingFragment StoreEntitySet="Batches">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+                <ScalarProperty Name="BatchStatus" ColumnName="BatchStatus" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="BatchPages" ColumnName="BatchPages" />
+                <ScalarProperty Name="IsAssignedAsDocument" ColumnName="IsAssignedAsDocument" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BatchExternalProperties">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.BatchExternalProperty">
+              <MappingFragment StoreEntitySet="BatchExternalProperties">
+                <ScalarProperty Name="ExternalPropertyId" ColumnName="ExternalPropertyId" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="ExternalPropertyValue" ColumnName="ExternalPropertyValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ComposedBarcodeConfigurations">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.ComposedBarcodeConfiguration">
+              <MappingFragment StoreEntitySet="ComposedBarcodeConfigurations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InitialPosition" ColumnName="InitialPosition" />
+                <ScalarProperty Name="FinalPosition" ColumnName="FinalPosition" />
+                <ScalarProperty Name="ElementType" ColumnName="ElementType" />
+                <ScalarProperty Name="Example" ColumnName="Example" />
+                <ScalarProperty Name="ExtractedData" ColumnName="ExtractedData" />
+                <ScalarProperty Name="BarcodeFormat" ColumnName="BarcodeFormat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomReportConfigurations">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.CustomReportConfiguration">
+              <MappingFragment StoreEntitySet="CustomReportConfigurations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProcedureName" ColumnName="ProcedureName" />
+                <ScalarProperty Name="UsedParameters" ColumnName="UsedParameters" />
+                <ScalarProperty Name="CustomReportSourceTitle" ColumnName="CustomReportSourceTitle" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentAssignments">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.DocumentAssignment">
+              <MappingFragment StoreEntitySet="DocumentAssignments">
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentBarcodeMetadatas">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.DocumentBarcodeMetadata">
+              <MappingFragment StoreEntitySet="DocumentBarcodeMetadatas">
+                <ScalarProperty Name="MetadataId" ColumnName="MetadataId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="SplitterElementType" ColumnName="SplitterElementType" />
+                <ScalarProperty Name="ExtractedInfo" ColumnName="ExtractedInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentComments">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.DocumentComment">
+              <MappingFragment StoreEntitySet="DocumentComments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="User" ColumnName="User" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentQrMetadatas">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.DocumentQrMetadata">
+              <MappingFragment StoreEntitySet="DocumentQrMetadatas">
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="DocumentHandle" ColumnName="DocumentHandle" />
+                <ScalarProperty Name="PageQuantity" ColumnName="PageQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.Document">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentsSplitters">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.DocumentsSplitter">
+              <MappingFragment StoreEntitySet="DocumentsSplitters">
+                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+                <ScalarProperty Name="DocumentSplitterType" ColumnName="DocumentSplitterType" />
+                <ScalarProperty Name="BarcodeValue" ColumnName="BarcodeValue" />
+                <ScalarProperty Name="Configuration" ColumnName="Configuration" />
+                <ScalarProperty Name="SeparatorExpectedValue" ColumnName="SeparatorExpectedValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocumentsUserActions">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.DocumentsUserAction">
+              <MappingFragment StoreEntitySet="DocumentsUserActions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="DocumentAction" ColumnName="DocumentAction" />
+                <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExternalProperties">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.ExternalProperty">
+              <MappingFragment StoreEntitySet="ExternalProperties">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Indices">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.Index">
+              <MappingFragment StoreEntitySet="Indices">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InstanceConfigurations">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.InstanceConfiguration">
+              <MappingFragment StoreEntitySet="InstanceConfigurations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigurationName" ColumnName="ConfigurationName" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginAudits">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.LoginAudit">
+              <MappingFragment StoreEntitySet="LoginAudits">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="AttemptDate" ColumnName="AttemptDate" />
+                <ScalarProperty Name="IsLoginSuccessful" ColumnName="IsLoginSuccessful" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PageQrMetadatas">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.PageQrMetadata">
+              <MappingFragment StoreEntitySet="PageQrMetadatas">
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="PageNumber" ColumnName="PageNumber" />
+                <ScalarProperty Name="DocumentHandle" ColumnName="DocumentHandle" />
+                <ScalarProperty Name="Qrcode" ColumnName="Qrcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.Page">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BatchId" ColumnName="BatchId" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="Version" ColumnName="Version" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaperSizeConfigurations">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.PaperSizeConfiguration">
+              <MappingFragment StoreEntitySet="PaperSizeConfigurations">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PixelTypeConfigurations">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.PixelTypeConfiguration">
+              <MappingFragment StoreEntitySet="PixelTypeConfigurations">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QueueManagementConfigurations">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.QueueManagementConfiguration">
+              <MappingFragment StoreEntitySet="QueueManagementConfigurations">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ServerUrl" ColumnName="ServerUrl" />
+                <ScalarProperty Name="QueueName" ColumnName="QueueName" />
+                <ScalarProperty Name="Exchange" ColumnName="Exchange" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleScannerProfilesAssignments">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.RoleScannerProfilesAssignment">
+              <MappingFragment StoreEntitySet="RoleScannerProfilesAssignments">
+                <ScalarProperty Name="ScannerProfileId" ColumnName="ScannerProfileId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RolesSpecialPermissions">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.RolesSpecialPermission">
+              <MappingFragment StoreEntitySet="RolesSpecialPermissions">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="HasWorkflowsAdministration" ColumnName="HasWorkflowsAdministration" />
+                <ScalarProperty Name="HasBatchesControl" ColumnName="HasBatchesControl" />
+                <ScalarProperty Name="HasReleaseBatches" ColumnName="HasReleaseBatches" />
+                <ScalarProperty Name="HasDeleteBatches" ColumnName="HasDeleteBatches" />
+                <ScalarProperty Name="HasRenameBatches" ColumnName="HasRenameBatches" />
+                <ScalarProperty Name="HasUnblockBatches" ColumnName="HasUnblockBatches" />
+                <ScalarProperty Name="HasDeletePages" ColumnName="HasDeletePages" />
+                <ScalarProperty Name="HasApproveAllDocuments" ColumnName="HasApproveAllDocuments" />
+                <ScalarProperty Name="HasIndexOnSupervision" ColumnName="HasIndexOnSupervision" />
+                <ScalarProperty Name="CanReleaseOnDigitalizationException" ColumnName="CanReleaseOnDigitalizationException" />
+                <ScalarProperty Name="CanWorkWithRandomAssignation" ColumnName="CanWorkWithRandomAssignation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoleWorkflowAssignments">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.RoleWorkflowAssignment">
+              <MappingFragment StoreEntitySet="RoleWorkflowAssignments">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+                <ScalarProperty Name="QueuePermissions" ColumnName="QueuePermissions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScannerProfiles">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.ScannerProfile">
+              <MappingFragment StoreEntitySet="ScannerProfiles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProfileStatus" ColumnName="ProfileStatus" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="AutomaticBrightness" ColumnName="AutomaticBrightness" />
+                <ScalarProperty Name="BothSides" ColumnName="BothSides" />
+                <ScalarProperty Name="AutomaticFeeding" ColumnName="AutomaticFeeding" />
+                <ScalarProperty Name="AutomaticScan" ColumnName="AutomaticScan" />
+                <ScalarProperty Name="ImageQuality" ColumnName="ImageQuality" />
+                <ScalarProperty Name="Resolution" ColumnName="Resolution" />
+                <ScalarProperty Name="AutoDetectedSize" ColumnName="AutoDetectedSize" />
+                <ScalarProperty Name="SkipBlankPage" ColumnName="SkipBlankPage" />
+                <ScalarProperty Name="AutomaticAlignment" ColumnName="AutomaticAlignment" />
+                <ScalarProperty Name="ScannerUi" ColumnName="ScannerUi" />
+                <ScalarProperty Name="ShowIndicator" ColumnName="ShowIndicator" />
+                <ScalarProperty Name="PixelTypeConfigurationId" ColumnName="PixelTypeConfigurationId" />
+                <ScalarProperty Name="PaperSizeConfigurationId" ColumnName="PaperSizeConfigurationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserActionLogs">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.UserActionLog">
+              <MappingFragment StoreEntitySet="UserActionLogs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="AuditedAction" ColumnName="AuditedAction" />
+                <ScalarProperty Name="AuditDate" ColumnName="AuditDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Volumes">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.Volume">
+              <MappingFragment StoreEntitySet="Volumes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebHookClients">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.WebHookClient">
+              <MappingFragment StoreEntitySet="WebHookClients">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ConfigurationName" ColumnName="ConfigurationName" />
+                <ScalarProperty Name="Methodtype" ColumnName="Methodtype" />
+                <ScalarProperty Name="Timeout" ColumnName="Timeout" />
+                <ScalarProperty Name="ClientServer" ColumnName="ClientServer" />
+                <ScalarProperty Name="ClientResource" ColumnName="ClientResource" />
+                <ScalarProperty Name="SubscriptionType" ColumnName="SubscriptionType" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkflowDocumentTypeAssignments">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.WorkflowDocumentTypeAssignment">
+              <MappingFragment StoreEntitySet="WorkflowDocumentTypeAssignments">
+                <ScalarProperty Name="WorkflowId" ColumnName="WorkflowId" />
+                <ScalarProperty Name="DocumentTypeId" ColumnName="DocumentTypeId" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workflows">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.Workflow">
+              <MappingFragment StoreEntitySet="Workflows">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="AutoName" ColumnName="AutoName" />
+                <ScalarProperty Name="IsArchived" ColumnName="IsArchived" />
+                <ScalarProperty Name="VolumeId" ColumnName="VolumeId" />
+                <ScalarProperty Name="DocumentLimitPerBatchQuantity" ColumnName="DocumentLimitPerBatchQuantity" />
+                <ScalarProperty Name="DocumentLimitPerBatchAlert" ColumnName="DocumentLimitPerBatchAlert" />
+                <ScalarProperty Name="PageLimitPerDocumentAlert" ColumnName="PageLimitPerDocumentAlert" />
+                <ScalarProperty Name="PageLimitPerDocumentQuantity" ColumnName="PageLimitPerDocumentQuantity" />
+                <ScalarProperty Name="SpecialPermissions" ColumnName="SpecialPermissions" />
+                <ScalarProperty Name="HasAutomaticAssignmentForDocuments" ColumnName="HasAutomaticAssignmentForDocuments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkflowSplitters">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.WorkflowSplitter">
+              <MappingFragment StoreEntitySet="WorkflowSplitters">
+                <ScalarProperty Name="WorkflowSplitterId" ColumnName="WorkflowSplitterId" />
+                <ScalarProperty Name="ReaderColorMode" ColumnName="ReaderColorMode" />
+                <ScalarProperty Name="ReaderTimeOut" ColumnName="ReaderTimeOut" />
+                <ScalarProperty Name="Orientation" ColumnName="Orientation" />
+                <ScalarProperty Name="CoordinateX" ColumnName="CoordinateX" />
+                <ScalarProperty Name="CoordinateY" ColumnName="CoordinateY" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="CodeFormat" ColumnName="CodeFormat" />
+                <ScalarProperty Name="ExpectedValue" ColumnName="ExpectedValue" />
+                <ScalarProperty Name="KeepPage" ColumnName="KeepPage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkflowStepsConfigurations">
+            <EntityTypeMapping TypeName="ProdoctivityCaptureDBModel.WorkflowStepsConfiguration">
+              <MappingFragment StoreEntitySet="WorkflowStepsConfigurations">
+                <ScalarProperty Name="WorkflowStepsConfigurationId" ColumnName="WorkflowStepsConfigurationId" />
+                <ScalarProperty Name="QaScanScannedDocumentsPercent" ColumnName="QaScanScannedDocumentsPercent" />
+                <ScalarProperty Name="QaScanDocumentsApprovementPercent" ColumnName="QaScanDocumentsApprovementPercent" />
+                <ScalarProperty Name="QaIndexScannedDocumentsPercent" ColumnName="QaIndexScannedDocumentsPercent" />
+                <ScalarProperty Name="QaIndexDocumentsApprovementPercent" ColumnName="QaIndexDocumentsApprovementPercent" />
+                <ScalarProperty Name="IndexingNumbers" ColumnName="IndexingNumbers" />
+                <ScalarProperty Name="HasIndexSupervision" ColumnName="HasIndexSupervision" />
+                <ScalarProperty Name="HasExternalValidation" ColumnName="HasExternalValidation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ExternalPropertiesWorkflowAssigments" TypeName="ProdoctivityCaptureDBModel.ExternalPropertiesWorkflowAssigments" StoreEntitySet="ExternalPropertiesWorkflowAssigments">
+            <EndProperty Name="ExternalProperties">
+              <ScalarProperty Name="Id" ColumnName="ExternalPropertyId" />
+            </EndProperty>
+            <EndProperty Name="Workflows">
+              <ScalarProperty Name="Id" ColumnName="WorkflowId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

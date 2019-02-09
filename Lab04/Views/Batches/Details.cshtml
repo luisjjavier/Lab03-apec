@@ -1,0 +1,82 @@
+﻿@model Lab04.Models.Batch
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Batch</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchPages)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchPages)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAssignedAsDocument)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsAssignedAsDocument)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BatchAssignment.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BatchAssignment.Username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Workflow.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Workflow.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

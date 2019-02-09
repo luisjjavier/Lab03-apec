@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7fc573aa244d4b3c99d37be032873fdf" Name="Diagram1">
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.ActiveInstanceService" Width="1.5" PointX="7.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.BatchAssignment" Width="1.5" PointX="10.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.Batch" Width="1.5" PointX="8.25" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.BatchExternalProperty" Width="1.5" PointX="3" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.ComposedBarcodeConfiguration" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.CustomReportConfiguration" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.DocumentAssignment" Width="1.5" PointX="12.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.DocumentBarcodeMetadata" Width="1.5" PointX="12.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.DocumentComment" Width="1.5" PointX="12.75" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.DocumentQrMetadata" Width="1.5" PointX="12.75" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.Document" Width="1.5" PointX="10.5" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.DocumentsSplitter" Width="1.5" PointX="8.25" PointY="25.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.DocumentsUserAction" Width="1.5" PointX="12.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.ExternalProperty" Width="1.5" PointX="0.75" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.Index" Width="1.5" PointX="12.75" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.InstanceConfiguration" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.LoginAudit" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.PageQrMetadata" Width="1.5" PointX="18" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.Page" Width="1.5" PointX="15.75" PointY="15.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.PaperSizeConfiguration" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.PixelTypeConfiguration" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.QueueManagementConfiguration" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.RoleScannerProfilesAssignment" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.RolesSpecialPermission" Width="1.5" PointX="9.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.RoleWorkflowAssignment" Width="1.5" PointX="8.25" PointY="28.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.ScannerProfile" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.UserActionLog" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.Volume" Width="1.5" PointX="3.75" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.WebHookClient" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.WorkflowDocumentTypeAssignment" Width="1.5" PointX="8.25" PointY="31" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.Workflow" Width="1.5" PointX="6" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.WorkflowSplitter" Width="1.5" PointX="8.25" PointY="33.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProdoctivityCaptureDBModel.WorkflowStepsConfiguration" Width="1.5" PointX="8.25" PointY="37.625" IsExpanded="true" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_BatchAssignments_dbo_Batches_BatchId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_Batches_dbo_Workflows_WorkflowId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_BatchExternalProperties_dbo_Batches_BatchId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_Documents_dbo_Batches_BatchId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_Pages_dbo_Batches_BatchId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_BatchExternalProperties_dbo_ExternalProperties_ExternalPropertyId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_DocumentAssignments_dbo_Documents_DocumentId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_DocumentBarcodeMetadatas_dbo_Documents_DocumentId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_DocumentComments_dbo_Documents_DocumentId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_DocumentQrMetadatas_dbo_Documents_DocumentId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_DocumentsUserActions_dbo_Documents_DocumentId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_Indices_dbo_Documents_DocumentId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_Pages_dbo_Documents_DocumentId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_DocumentsSplitters_dbo_Workflows_WorkflowDocumentSplitterId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_PageQrMetadatas_dbo_Pages_PageId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_ScannerProfiles_dbo_PaperSizeConfigurations_PaperSizeConfigurationId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_ScannerProfiles_dbo_PixelTypeConfigurations_PixelTypeConfigurationId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_RoleScannerProfilesAssignments_dbo_ScannerProfiles_ScannerProfileId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_RoleWorkflowsAssignments_dbo_Workflows_WorkflowId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_Workflows_dbo_Volumes_VolumeId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_WorkflowDocumentTypesAssignments_dbo_Workflows_WorkflowId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_WorkflowSplitters_dbo_Workflows_WorkflowSplitterId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.FK_dbo_WorkflowStepsConfigurations_dbo_Workflows_WorkflowStepsConfigurationId" ManuallyRouted="false" />
+        <AssociationConnector Association="ProdoctivityCaptureDBModel.ExternalPropertiesWorkflowAssigments" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
